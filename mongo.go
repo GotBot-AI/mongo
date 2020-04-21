@@ -110,9 +110,9 @@ func (clnt *Client) DeleteMany(coll string, filter bson.D) int64 {
 }
 
 //FindOneAndUpdate - Update one document
-func (clnt *Client) FindOneAndUpdate(coll string, filter bson.D, query *primitive.D) *mongo.SingleResult {
+func (clnt *Client) FindOneAndUpdate(coll string, query bson.D, doc *primitive.D) *mongo.SingleResult {
 	collection := clnt.DB.Collection(coll)
-	singleResult := collection.FindOneAndUpdate(context.TODO(), filter, bson.D{{"$set", query}})
+	singleResult := collection.FindOneAndUpdate(context.TODO(), query, bson.D{{"$set", doc}})
 	return singleResult
 }
 
